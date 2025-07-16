@@ -16,7 +16,7 @@ st.title("📈 Bitcoin Price Predictor (LSTM)")
 st.markdown("This app predicts the **next-day closing price** of Bitcoin using LSTM neural networks.")
 
 # ----- Load Model -----
-model = load_model("notebooks/btc_lstm_model.keras")  # adjust this if it's in another location
+model = load_model("notebooks/btc_lstm_model.keras") 
 
 # ----- Load Data -----
 @st.cache_data
