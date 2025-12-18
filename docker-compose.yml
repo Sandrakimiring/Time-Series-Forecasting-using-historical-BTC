@@ -1,0 +1,40 @@
+ version: '3.8'
+
+services:
+  crypto-predictor:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: crypto-predictor-app
+    ports:
+      - "8501:8501"
+    volumes:
+      # Mount notebooks for model access (read-only in production)
+      - ./notebooks:/app/notebooks:ro
+    environment:
+      - STREAMLIT_SERVER_PORT=8501
+      - STREAMLIT_SERVER_ADDRESS=0.0.0.0
+      - STREAMLIT_BROWSER_GATHER_USAGE_STATS=false
+    restart: unless-stopped
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:8501/_stcore/health"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 40s
+
+  # Optional: Add a development service with hot-reload
+  crypto-predictor-dev:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: crypto-predictor-dev
+    ports:
+      - "8502:8501"
+    volumes:
+      - .:/app
+    environment:
+      - STREAMLIT_SERVER_RUN_ON_SAVE=true
+    profiles:
+      - dev
+

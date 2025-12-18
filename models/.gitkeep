@@ -1,0 +1,11 @@
+# This directory contains trained LSTM models for each cryptocurrency
+# Models are automatically retrained daily via GitHub Actions
+
+# Files in this directory:
+# - btc_lstm_model.keras  - Bitcoin model
+# - eth_lstm_model.keras  - Ethereum model
+# - sol_lstm_model.keras  - Solana model
+# - xrp_lstm_model.keras  - Ripple model
+# - ada_lstm_model.keras  - Cardano model
+# - training_metrics.json - Training results and metrics
+
